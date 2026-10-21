@@ -24,7 +24,7 @@ Task4_PY/
 └── requirements.txt                # Editable install with development extras
 ```
 
-The data flow is **source files → pipeline → analytics → dashboard or API**. The pipeline and analytics modules do not depend on Streamlit, so their logic can be reused by either interface.
+The project includes source files, a processing pipeline, analytics, and dashboard and API interfaces. The pipeline and analytics modules do not depend on Streamlit, so their logic can be reused by either interface.
 
 ## Quickstart
 
@@ -42,10 +42,10 @@ python -m pip install -r requirements.txt
 
 ### Configure
 
-Copy `.env.example` to `.env` and set your Gemini API key:
+Copy `.env.example` to `.env` and provide a Gemini API key:
 
 ```env
-GEMINI_API_KEY=your_gemini_api_key_here
+GEMINI_API_KEY=replace_with_gemini_api_key
 GEMINI_MODEL=gemini-3.7-flash
 ```
 
