@@ -258,7 +258,13 @@ with col_copilot, st.container(key="copilot_panel"):
         st.markdown("##### 💬 AI Copilot")
     with clear_button_column:
         if st.button("Clear", key="clear_chat_btn", width="stretch"):
-            st.session_state.messages = []
+            st.session_state.messages = [
+                {
+                    "role": "assistant",
+                    "content": "Hi! I'm your AI Copilot. Ask me about catalog books, publication trends, authors, or sales numbers.",
+                    "tool_calls": []
+                }
+            ]
             st.rerun()
 
     suggested_prompt = None
