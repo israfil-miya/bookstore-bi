@@ -254,6 +254,29 @@ div[data-testid="stMetric"] div[data-testid="stMetricValue"] {
   font-size: 1.85rem !important;
   font-weight: 800 !important;
 }
+.st-key-dash_panel
+  div[data-testid="stHorizontalBlock"]:has([data-testid="stMetric"]) {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 12px !important;
+}
+.st-key-dash_panel
+  div[data-testid="stHorizontalBlock"]:has([data-testid="stMetric"])
+  > div[data-testid="stColumn"] {
+  width: auto !important;
+  min-width: 0 !important;
+  flex: none !important;
+}
+.st-key-dash_panel [data-testid="stMetricLabel"],
+.st-key-dash_panel [data-testid="stMetricLabel"] *,
+.st-key-dash_panel [data-testid="stMetricValue"],
+.st-key-dash_panel [data-testid="stMetricValue"] * {
+  max-width: 100% !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  overflow-wrap: anywhere !important;
+}
 div[data-testid="stMetricDelta"] {
   font-weight: 500 !important;
   font-size: 0.82rem !important;
@@ -353,21 +376,6 @@ div[data-testid="stMetricDelta"] svg {
     padding-right: 10px !important;
   }
 
-  .st-key-dash_panel
-    div[data-testid="stHorizontalBlock"]:has([data-testid="stMetric"]) {
-    display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 10px !important;
-  }
-
-  .st-key-dash_panel
-    div[data-testid="stHorizontalBlock"]:has([data-testid="stMetric"])
-    > div[data-testid="stColumn"] {
-    width: auto !important;
-    min-width: 0 !important;
-    flex: none !important;
-  }
-
   div[data-testid="stMetric"] {
     padding: 12px !important;
   }
@@ -378,21 +386,6 @@ div[data-testid="stMetricDelta"] svg {
 
   div[data-testid="stMetricValue"] {
     font-size: 1.15rem !important;
-    overflow-wrap: anywhere !important;
-  }
-
-  .st-key-dash_panel [data-testid="stMetricValue"] .stMarkdownEllipsis {
-    font-size: 1.15rem !important;
-    white-space: normal !important;
-    overflow: visible !important;
-    text-overflow: clip !important;
-    overflow-wrap: anywhere !important;
-  }
-
-  .st-key-dash_panel [data-testid="stMetricLabel"] .stMarkdownEllipsis {
-    white-space: normal !important;
-    overflow: visible !important;
-    text-overflow: clip !important;
   }
 }
 
