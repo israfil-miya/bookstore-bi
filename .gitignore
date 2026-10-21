@@ -1,0 +1,15 @@
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Python cache and bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+results.json
+.venv/
+build/
+dist/
+*.egg-info/

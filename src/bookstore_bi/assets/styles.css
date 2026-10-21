@@ -1,0 +1,261 @@
+:root {
+        --top-offset: 50px;    /* sticky navbar */
+        --bottom-safe: 14px;   /* slim margin above taskbar so panels go all the way to the bottom */
+    }
+
+    /* Hide native left sidebar, native header (deploy button, 3-dots menu, toolbar, decorations) */
+    section[data-testid="stSidebar"],
+    button[data-testid="stExpandSidebarButton"],
+    div[data-testid="collapsedControl"],
+    header[data-testid="stHeader"],
+    #MainMenu,
+    div[data-testid="stDeployButton"],
+    .stAppDeployButton,
+    button[data-testid="stMainMenu"],
+    div[data-testid="stToolbar"],
+    div[data-testid="stDecoration"] {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0px !important;
+        width: 0px !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+
+    div[data-testid="stStatusWidget"] {
+        position: fixed !important;
+        top: 8px !important;
+        right: 205px !important;
+        z-index: 999999 !important;
+        height: 32px !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    [data-testid="stSkeleton"] {
+        border-radius: 8px !important;
+        background: rgba(255, 255, 255, 0.08) !important;
+    }
+
+    /* 1. Eliminate whole-page scrolling completely */
+    html, body,
+    [data-testid="stAppViewContainer"],
+    section[data-testid="stMain"] {
+        height: 100dvh !important;
+        max-height: 100dvh !important;
+        overflow: hidden !important;
+    }
+
+    /* 2. Top sticky frosted navbar bar */
+    .top-navbar-bar {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 48px !important;
+        background: rgba(14, 17, 23, 0.96) !important;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.22) !important;
+        z-index: 999990 !important;
+    }
+
+    /* Zero out flow height of top header elements so columns start right below navbar */
+    div[data-testid="stElementContainer"]:has(.top-navbar-bar),
+    div[data-testid="stElementContainer"]:has(.top-header-brand) {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        height: 0px !important;
+        min-height: 0px !important;
+        max-height: 0px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        pointer-events: none !important;
+    }
+
+    /* 3. Block container: no outer page scroll, padded below sticky top bar */
+    div[data-testid="stMainBlockContainer"],
+    .main .block-container {
+        max-width: 100% !important;
+        height: 100dvh !important;
+        max-height: 100dvh !important;
+        padding-top: var(--top-offset) !important;
+        padding-bottom: var(--bottom-safe) !important;
+        padding-left: 18px !important;
+        padding-right: 18px !important;
+        overflow: hidden !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Slim scrollbars inside scrolling containers */
+    div[data-testid="stVerticalBlockWithBorder"]::-webkit-scrollbar,
+    div[data-testid="column"]::-webkit-scrollbar,
+    .st-key-dash_panel::-webkit-scrollbar,
+    .st-key-copilot_panel::-webkit-scrollbar,
+    .st-key-chat_scroll::-webkit-scrollbar {
+        width: 6px !important;
+    }
+    div[data-testid="stVerticalBlockWithBorder"]::-webkit-scrollbar-thumb,
+    div[data-testid="column"]::-webkit-scrollbar-thumb,
+    .st-key-dash_panel::-webkit-scrollbar-thumb,
+    .st-key-copilot_panel::-webkit-scrollbar-thumb,
+    .st-key-chat_scroll::-webkit-scrollbar-thumb {
+        background: rgba(128, 128, 128, 0.35) !important;
+        border-radius: 4px !important;
+    }
+
+    /* Left dashboard panel: full height scrolling view to the bottom */
+    .st-key-dash_panel,
+    .st-key-dash_panel > div[data-testid="stVerticalBlock"] {
+        height: calc(100dvh - var(--top-offset) - var(--bottom-safe)) !important;
+        max-height: calc(100dvh - var(--top-offset) - var(--bottom-safe)) !important;
+        overflow-y: auto !important;
+        padding-right: 10px !important;
+        padding-bottom: 24px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Right copilot card: stretches all the way to the bottom */
+    .st-key-copilot_panel {
+        height: calc(100dvh - var(--top-offset) - var(--bottom-safe) - 16px) !important;
+        max-height: calc(100dvh - var(--top-offset) - var(--bottom-safe) - 16px) !important;
+        min-height: 0 !important;
+        background-color: var(--background-secondary, #1a1c24) !important;
+        border: 1px solid rgba(128, 128, 128, 0.25) !important;
+        border-radius: 16px !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12) !important;
+        padding: 12px 14px 10px 14px !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        gap: 4px !important;
+    }
+
+    .st-key-copilot_panel > div[data-testid="stLayoutWrapper"]:has(.st-key-chat_scroll) {
+        flex: 1 1 0% !important;
+        min-height: 0 !important;
+        overflow: hidden !important;
+    }
+
+    .st-key-copilot_panel > div[data-testid="stLayoutWrapper"]:has([data-testid="stChatInput"]) {
+        flex: 0 0 auto !important;
+        min-height: 0 !important;
+    }
+
+    .st-key-copilot_panel div[data-testid="stHorizontalBlock"] {
+        align-items: center !important;
+    }
+
+    .st-key-copilot_panel div[data-testid="stHorizontalBlock"] h5 {
+        margin: 0 !important;
+        padding: 0 !important;
+        line-height: 1 !important;
+    }
+
+    .st-key-copilot_panel div[data-testid="stHorizontalBlock"] [data-testid="stMarkdownContainer"]:has(h5) {
+        margin-bottom: 0 !important;
+    }
+
+    /* Chat messages fill the available space above the input and scroll when needed */
+    .st-key-chat_scroll,
+    .st-key-chat_scroll > div[data-testid="stVerticalBlock"] {
+        flex: 1 1 0% !important;
+        height: auto !important;
+        max-height: none !important;
+        min-height: 0 !important;
+        overflow-y: auto !important;
+        margin-bottom: 4px !important;
+        padding-right: 4px !important;
+    }
+
+    .st-key-copilot_panel [data-testid="stChatInput"] {
+        flex: 0 0 auto !important;
+    }
+
+    /* Fixed Brand Title at the top-left of the header */
+    .top-header-brand {
+        position: fixed !important;
+        top: 10px !important;
+        left: 20px !important;
+        z-index: 999999 !important;
+        font-size: 1.22rem !important;
+        font-weight: 800 !important;
+        color: var(--text-color, #f8fafc) !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        letter-spacing: -0.01em !important;
+        user-select: none;
+    }
+
+    /* Store selector – st.pills, pinned in the navbar */
+    .st-key-top_store_selector {
+        position: fixed !important;
+        top: 8px !important;
+        right: 16px !important;
+        width: auto !important;
+        height: 32px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        z-index: 999999 !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+    .st-key-top_store_selector button {
+        padding: 2px 12px !important;
+        min-height: 0 !important;
+        font-size: 0.77rem !important;
+        font-weight: 600 !important;
+        letter-spacing: 0.03em !important;
+    }
+    .st-key-top_store_selector button p {
+        font-size: 0.77rem !important;
+        font-weight: 600 !important;
+        line-height: 1.4 !important;
+        margin: 0 !important;
+    }
+
+    /* Metric Card Styling */
+    div[data-testid="metric-container"] {
+        background-color: var(--background-secondary);
+        border: 1px solid rgba(128, 128, 128, 0.2);
+        border-radius: 12px;
+        padding: 16px 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    div[data-testid="metric-container"]:hover {
+        transform: translateY(-2px);
+        border-color: #6366f1;
+    }
+    div[data-testid="metric-container"] label {
+        font-size: 0.82rem !important;
+        font-weight: 700 !important;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--text-color);
+        opacity: 0.85;
+    }
+    div[data-testid="metric-container"] div[data-testid="stMetricValue"] {
+        font-size: 1.85rem !important;
+        font-weight: 800 !important;
+    }
+    div[data-testid="stMetricDelta"] {
+        font-weight: 500 !important;
+        font-size: 0.82rem !important;
+        color: rgba(148, 163, 184, 0.95) !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 4px !important;
+        padding: 2px 8px !important;
+        border: 1px solid rgba(148, 163, 184, 0.3) !important;
+        border-radius: 6px !important;
+        background: rgba(148, 163, 184, 0.08) !important;
+        width: fit-content !important;
+    }
+    div[data-testid="stMetricDelta"] svg {
+        display: none !important;
+    }
