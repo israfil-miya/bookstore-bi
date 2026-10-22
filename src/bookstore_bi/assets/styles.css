@@ -42,7 +42,9 @@ html,
 body,
 [data-testid="stAppViewContainer"],
 section[data-testid="stMain"] {
+  height: 100vh !important;
   height: 100dvh !important;
+  max-height: 100vh !important;
   max-height: 100dvh !important;
   overflow: hidden !important;
 }
@@ -79,7 +81,9 @@ div[data-testid="stElementContainer"]:has(.top-header-brand) {
 div[data-testid="stMainBlockContainer"],
 .main .block-container {
   max-width: 100% !important;
+  height: 100vh !important;
   height: 100dvh !important;
+  max-height: 100vh !important;
   max-height: 100dvh !important;
   padding-top: var(--top-offset) !important;
   padding-bottom: var(--bottom-safe) !important;
@@ -109,7 +113,9 @@ div[data-testid="column"]::-webkit-scrollbar-thumb,
 /* Left dashboard panel: full height scrolling view to the bottom */
 .st-key-dash_panel,
 .st-key-dash_panel > div[data-testid="stVerticalBlock"] {
+  height: calc(100vh - var(--top-offset) - var(--bottom-safe)) !important;
   height: calc(100dvh - var(--top-offset) - var(--bottom-safe)) !important;
+  max-height: calc(100vh - var(--top-offset) - var(--bottom-safe)) !important;
   max-height: calc(100dvh - var(--top-offset) - var(--bottom-safe)) !important;
   overflow-y: auto !important;
   padding-right: 10px !important;
@@ -117,14 +123,26 @@ div[data-testid="column"]::-webkit-scrollbar-thumb,
   box-sizing: border-box !important;
 }
 
+/* Size the Copilot column wrapper without relying on :has() in Safari. */
+[data-testid="stMainBlockContainer"]
+  > [data-testid="stVerticalBlock"]
+  > [data-testid="stLayoutWrapper"]
+  > [data-testid="stHorizontalBlock"]
+  > [data-testid="stColumn"]:nth-child(2)
+  > [data-testid="stVerticalBlock"]
+  > [data-testid="stLayoutWrapper"] {
+  height: calc(100vh - var(--top-offset) - var(--bottom-safe) - 16px) !important;
+  height: calc(100dvh - var(--top-offset) - var(--bottom-safe) - 16px) !important;
+  max-height: calc(100vh - var(--top-offset) - var(--bottom-safe) - 16px) !important;
+  max-height: calc(100dvh - var(--top-offset) - var(--bottom-safe) - 16px) !important;
+  min-height: 0 !important;
+  flex: 1 1 auto !important;
+}
+
 /* Right copilot card: stretches all the way to the bottom */
 .st-key-copilot_panel {
-  height: calc(
-    100dvh - var(--top-offset) - var(--bottom-safe) - 16px
-  ) !important;
-  max-height: calc(
-    100dvh - var(--top-offset) - var(--bottom-safe) - 16px
-  ) !important;
+  height: 100% !important;
+  max-height: 100% !important;
   min-height: 0 !important;
   background-color: var(--background-secondary, #1a1c24) !important;
   border: 1px solid rgba(128, 128, 128, 0.25) !important;
@@ -139,15 +157,13 @@ div[data-testid="column"]::-webkit-scrollbar-thumb,
   gap: 4px !important;
 }
 
-.st-key-copilot_panel
-  > div[data-testid="stLayoutWrapper"]:has(.st-key-chat_scroll) {
+.st-key-copilot_panel > div[data-testid="stLayoutWrapper"]:nth-child(2) {
   flex: 1 1 0% !important;
   min-height: 0 !important;
   overflow: hidden !important;
 }
 
-.st-key-copilot_panel
-  > div[data-testid="stLayoutWrapper"]:has([data-testid="stChatInput"]) {
+.st-key-copilot_panel > .st-key-copilot_chat_input {
   flex: 0 0 auto !important;
   min-height: 0 !important;
 }
@@ -315,6 +331,7 @@ div[data-testid="stMetricDelta"] svg {
   [data-testid="stAppViewContainer"],
   section[data-testid="stMain"] {
     height: auto !important;
+    min-height: 100vh !important;
     min-height: 100dvh !important;
     max-height: none !important;
     overflow-x: hidden !important;
@@ -324,6 +341,7 @@ div[data-testid="stMetricDelta"] svg {
   div[data-testid="stMainBlockContainer"],
   .main .block-container {
     height: auto !important;
+    min-height: 100vh !important;
     min-height: 100dvh !important;
     max-height: none !important;
     padding-left: 16px !important;
@@ -358,9 +376,24 @@ div[data-testid="stMetricDelta"] svg {
   }
 
   .st-key-copilot_panel {
+    height: min(70vh, 680px) !important;
     height: min(70dvh, 680px) !important;
     min-height: 400px !important;
     max-height: none !important;
+  }
+
+  [data-testid="stMainBlockContainer"]
+    > [data-testid="stVerticalBlock"]
+    > [data-testid="stLayoutWrapper"]
+    > [data-testid="stHorizontalBlock"]
+    > [data-testid="stColumn"]:nth-child(2)
+    > [data-testid="stVerticalBlock"]
+    > [data-testid="stLayoutWrapper"] {
+    height: min(70vh, 680px) !important;
+    height: min(70dvh, 680px) !important;
+    min-height: 400px !important;
+    max-height: none !important;
+    flex: 0 0 auto !important;
   }
 
   div[data-testid="stStatusWidget"] {
